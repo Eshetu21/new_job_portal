@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "job_portal_app",
+            "cwd": "job_portal_app",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "job_portal_app (profile mode)",
+            "cwd": "job_portal_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "job_portal_app (release mode)",
+            "cwd": "job_portal_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
