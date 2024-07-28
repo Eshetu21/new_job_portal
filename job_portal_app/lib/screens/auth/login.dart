@@ -198,11 +198,8 @@ class _LoginPageState extends State<LoginPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(12.5),
-                            child: Image.asset("assets/icons/google_logo.jpg",
-                                width: 25),
-                          ),
+                          Image.asset("assets/icons/google_logo.png",
+                              width: 25),
                           SizedBox(width: 10),
                           Text("SIGN IN WITH GOOGLE",
                               style: GoogleFonts.poppins(
