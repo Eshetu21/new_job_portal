@@ -1,3 +1,3 @@
-# post_app
+# job_portal_app
 
 A new Flutter project.
