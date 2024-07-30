@@ -84,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           SizedBox(width: 8),
                           Text(
-                            _lastnameController.text,
+                            userController.getFieldValue("Last Name"),
                             style: TextStyle(
                                 fontFamily: GoogleFonts.poppins().fontFamily,
                                 color: Colors.white,
@@ -94,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                       SizedBox(height: 5),
-                      Text(_emailController.text,
+                      Text(userController.getFieldValue("Email"),
                           style: GoogleFonts.poppins(
                               color: Colors.white,
                               fontWeight: FontWeight.bold)),
@@ -104,9 +104,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           Icon(Icons.phone_android_outlined,
                               color: Colors.white, size: 18),
                           Text(
-                            _phoneController.text.isEmpty
+                            userController.getFieldValue("Phone Number").isEmpty
                                 ? "unknown"
-                                : _phoneController.text,
+                                : userController.getFieldValue("Phone Number"),
                             style: TextStyle(
                                 fontFamily: GoogleFonts.poppins().fontFamily,
                                 color: Colors.white,
@@ -121,9 +121,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           Icon(Icons.location_on_outlined,
                               color: Colors.white, size: 18),
                           Text(
-                            _addressController.text.isEmpty
+                           userController.getFieldValue("Address").isEmpty
                                 ? "unknown"
-                                : _addressController.text,
+                                : userController.getFieldValue("Address"),
                             style: TextStyle(
                                 fontFamily: GoogleFonts.poppins().fontFamily,
                                 color: Colors.white,
@@ -185,9 +185,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             color: Colors.white.withOpacity(0.7)),
-                        child: _bioController.text == ""
+                        child:userController.getFieldValue("Bio")== ""
                             ? Text("No bio ")
-                            : Text(_bioController.text),
+                            : Text(userController.getFieldValue("Bio")),
                       ),
                     ],
                   ),
