@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:post_app/models/authentication/update_info.dart';
+import 'package:post_app/models/authentication/user_controller.dart';
 import 'package:post_app/utilities/edit_content.dart';
 
-class ProfileContent extends StatelessWidget {
+class ProfileContent extends StatefulWidget {
   final String title;
   final String img;
   final TextEditingController controller;
@@ -15,6 +16,11 @@ class ProfileContent extends StatelessWidget {
     required this.controller,
   });
 
+  @override
+  State<ProfileContent> createState() => _ProfileContentState();
+}
+
+class _ProfileContentState extends State<ProfileContent> {
   final TextEditingController _firstnameController = TextEditingController();
   final TextEditingController _lastnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -27,8 +33,15 @@ class ProfileContent extends StatelessWidget {
   final TextEditingController _addressController = TextEditingController();
 
   final UpdateUserInfo updateuserinfo = Get.put(UpdateUserInfo());
+  final UserController userController = Get.put(UserController());
 
-  void saveInfo() {
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.text = userController.getFieldValue(widget.title);
+  }
+
+  void saveInfo(String field, String value) {
     print('First Name: ${_firstnameController.text}');
     print('Last Name: ${_lastnameController.text}');
     print('Email: ${_emailController.text}');
@@ -39,6 +52,9 @@ class ProfileContent extends StatelessWidget {
     print('Experience: ${_experienceController.text}');
     print('Phone Number: ${_phoneController.text}');
     print('Address: ${_addressController.text}');
+
+    userController.setFieldValue(field, value);
+
     updateuserinfo.updateUserInfo(
       firstname: _firstnameController.text,
       lastname: _lastnameController.text,
@@ -55,9 +71,10 @@ class ProfileContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(userController.firstname.value);
     TextEditingController specificController;
 
-    switch (title) {
+    switch (widget.title) {
       case 'First Name':
         specificController = _firstnameController;
         break;
@@ -92,7 +109,7 @@ class ProfileContent extends StatelessWidget {
         specificController = TextEditingController();
     }
 
-    specificController.text = controller.text;
+    specificController.text = widget.controller.text;
 
     return Container(
       margin: EdgeInsets.only(top: 10, left: 30, right: 30, bottom: 10),
@@ -100,10 +117,10 @@ class ProfileContent extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset('assets/icons/$img'),
+              Image.asset('assets/icons/${widget.img}'),
               SizedBox(width: 5),
               Text(
-                title,
+                widget.title,
                 style: GoogleFonts.poppins(
                     color: Color(0xFF150B3D), fontWeight: FontWeight.bold),
               ),
@@ -114,11 +131,13 @@ class ProfileContent extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => EditContent(
-                        title: title,
-                        hintText: "Write your ${title.toLowerCase()} here",
+                        title: widget.title,
+                        hintText:
+                            "Write your ${widget.title.toLowerCase()} here",
                         controller: specificController,
                         height: 180,
-                        saveInfo: saveInfo,
+                        saveInfo: () =>
+                            saveInfo(widget.title, specificController.text),
                       ),
                     ),
                   );
@@ -152,7 +171,13 @@ class ProfileContent extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               color: Colors.white.withOpacity(0.7),
             ),
-            child: Text(controller.text.isEmpty ? "Empty" : controller.text),
+            child: Obx(
+              () => Text(
+                userController.getFieldValue(widget.title).isEmpty
+                    ? "Empty"
+                    : userController.getFieldValue(widget.title),
+              ),
+            ),
           ),
         ],
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:post_app/models/authentication/update_info.dart';
+import 'package:post_app/models/authentication/user_controller.dart';
 
 class EditContent extends StatefulWidget {
   final String title;
@@ -23,6 +24,7 @@ class EditContent extends StatefulWidget {
 }
 
 class _EditContentState extends State<EditContent> {
+  final UserController userController = Get.find<UserController>();
   final UpdateUserInfo updateuserinfo = Get.put(UpdateUserInfo());
 
   @override

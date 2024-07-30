@@ -5,10 +5,11 @@ import 'package:post_app/screens/get_started/loading_screen.dart';
 
 import 'models/authentication/user_controller.dart';
 
-void main()  {
-   Get.put(UserController());
-  GetStorage.init();
-  
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
+  Get.put(UserController());
+
   runApp(const MainApp());
 }
 
@@ -17,8 +18,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-
     return const GetMaterialApp(
         debugShowCheckedModeBanner: false, home: LoadingScreen());
   }

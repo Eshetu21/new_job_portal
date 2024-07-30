@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GetUser _getUser = GetUser();
-  final UserController _userController = Get.put(UserController());
+  final UserController _userController = Get.find<UserController>();
 
   Future<void> fetchuser() async {
     var user = await _getUser.getuser();
@@ -24,12 +24,13 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
     fetchuser();
   }
 
   @override
   Widget build(BuildContext context) {
-    print(_userController.firstname.value);
+    print(_userController.firstname);
     return Scaffold(
       backgroundColor: Color(0xFFE5E5E5),
       body: SafeArea(
@@ -53,8 +54,7 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfilePage()),
+                        MaterialPageRoute(builder: (context) => ProfilePage()),
                       );
                     },
                     child: Image.asset(
@@ -66,13 +66,11 @@ class _HomePageState extends State<HomePage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 12),
-                child: Obx(() {
-                  return Text(
-                    _userController.firstname.value,
-                    style: GoogleFonts.poppins(
-                        fontSize: 26, color: Color(0xFF0D0140)),
-                  );
-                }),
+                child: Obx(() => Text(
+                      _userController.firstname.value,
+                      style: GoogleFonts.poppins(
+                          fontSize: 26, color: Color(0xFF0D0140)),
+                    )),
               ),
               SizedBox(height: 12),
               Container(
