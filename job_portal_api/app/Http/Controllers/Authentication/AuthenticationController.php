@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Authentication;
+
 use Illuminate\Support\Facades\Log;
 
 use App\Http\Controllers\Controller;
@@ -59,25 +60,27 @@ class AuthenticationController extends Controller
         return $request->user();
     }
 
-   public function update(UpdateRequest $request)
-{
-    $user = $request->user();
-    $validatedData = $request->validated();
+    public function update(UpdateRequest $request)
+    {
+        $user = $request->user();
+        $validatedData = $request->validated();
 
-    // Debugging: Check validated data
-    Log::info('Update data:', $validatedData);
+        if ($request->hasFile('profile_pic')) {
+            $profilePicPath = $request->file('profile_pic')->store('profile_pics', 'public');
+            $validatedData['profile_pic'] = $profilePicPath;
+        }
 
-    // Ensure only fields with values are updated
-    $user->fill($validatedData);
-    $user->save();
 
-    // Debugging: Check updated user
-    Log::info('Updated user:', $user->toArray());
+        if ($request->hasFile('cv')) {
+            $cvPath = $request->file('cv')->store('cvs', 'public');
+            $validatedData['cv'] = $cvPath;
+        }
 
-    return response()->json([
-        "message" => "Data updated successfully",
-        "user" => $user
-    ], 200);
-}
-
+        $user->fill($validatedData);
+        $user->save();
+        return response()->json([
+            "message" => "Data updated successfully",
+            "user" => $user
+        ], 200);
+    }
 }

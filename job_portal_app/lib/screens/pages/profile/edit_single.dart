@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,16 +15,16 @@ class ProfileContent extends StatelessWidget {
     required this.controller,
   });
 
-  late TextEditingController _firstnameController = TextEditingController();
-  late TextEditingController _lastnameController = TextEditingController();
-  late TextEditingController _emailController = TextEditingController();
-  late TextEditingController _profile_picController = TextEditingController();
-  late TextEditingController _bioController = TextEditingController();
-  late TextEditingController _cvController = TextEditingController();
-  late TextEditingController _educationController = TextEditingController();
-  late TextEditingController _experienceController = TextEditingController();
-  late TextEditingController _phoneController = TextEditingController();
-  late TextEditingController _addressController = TextEditingController();
+  final TextEditingController _firstnameController = TextEditingController();
+  final TextEditingController _lastnameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _profile_picController = TextEditingController();
+  final TextEditingController _bioController = TextEditingController();
+  final TextEditingController _cvController = TextEditingController();
+  final TextEditingController _educationController = TextEditingController();
+  final TextEditingController _experienceController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
 
   final UpdateUserInfo updateuserinfo = Get.put(UpdateUserInfo());
 
@@ -93,8 +91,11 @@ class ProfileContent extends StatelessWidget {
       default:
         specificController = TextEditingController();
     }
+
+    specificController.text = controller.text;
+
     return Container(
-      margin: EdgeInsets.only(top: 25, left: 30, right: 30, bottom: 10),
+      margin: EdgeInsets.only(top: 10, left: 30, right: 30, bottom: 10),
       child: Column(
         children: [
           Row(
@@ -114,7 +115,7 @@ class ProfileContent extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => EditContent(
                         title: title,
-                        hintText: controller.text==""? "Write your ${title.toLowerCase()} here":controller.text,
+                        hintText: "Write your ${title.toLowerCase()} here",
                         controller: specificController,
                         height: 180,
                         saveInfo: saveInfo,
@@ -147,7 +148,6 @@ class ProfileContent extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(8),
             width: double.infinity,
-            height: 60,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color: Colors.white.withOpacity(0.7),

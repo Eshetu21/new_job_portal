@@ -59,7 +59,7 @@ class _EditContentState extends State<EditContent> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white.withOpacity(0.8)),
-                child: TextFormField(
+                child: TextField(
                   controller: widget.controller,
                   decoration: InputDecoration(
                       border: InputBorder.none,
@@ -78,7 +78,6 @@ class _EditContentState extends State<EditContent> {
                       : GestureDetector(
                           onTap: () {
                             widget.saveInfo();
-                            
                           },
                           child: Container(
                             margin: EdgeInsets.only(bottom: 80),

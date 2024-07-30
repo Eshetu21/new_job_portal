@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:post_app/screens/pages/profile/edit_profile.dart';
+import 'package:post_app/screens/pages/profile/your_infromation.dart';
 import 'package:post_app/utilities/get_user.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -45,7 +45,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    print(_bioController.text);
+    final education_detail = _educationController.text.split(",");
+    final experience_detail = _experienceController.text.split(",");
+
     return Scaffold(
       backgroundColor: Color(0xFFE5E5E5),
       body: SingleChildScrollView(
@@ -154,76 +156,121 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               SizedBox(height: 10),
               Container(
-                margin: EdgeInsets.only(top:20,left: 20,right: 20,bottom: 10),
+                margin:
+                    EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),
                 child: Column(
                   children: [
                     Row(
                       children: [
                         Image.asset("assets/icons/about_me.png"),
                         SizedBox(width: 5),
-                        Text("Bio",style: GoogleFonts.poppins(
+                        Text(
+                          "Bio",
+                          style: GoogleFonts.poppins(
                               color: Color(0xFF150B3D),
-                              fontWeight: FontWeight.bold),)
+                              fontWeight: FontWeight.bold),
+                        )
                       ],
                     ),
                     SizedBox(height: 5),
                     Container(
                       padding: EdgeInsets.all(8),
                       width: double.infinity,
-                      height: 60,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color: Colors.white.withOpacity(0.7)),
-                      child: _bioController.text==""?Text("No bio "): Text(_bioController.text),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.white.withOpacity(0.7)),
+                      child: _bioController.text == ""
+                          ? Text("No bio ")
+                          : Text(_bioController.text),
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 10),
               Container(
-                margin: EdgeInsets.only(left: 20,right: 20,bottom: 10),
+                margin: EdgeInsets.only(left: 20, right: 20, bottom: 10),
                 child: Column(
                   children: [
                     Row(
                       children: [
                         Image.asset("assets/icons/edu.png"),
                         SizedBox(width: 5),
-                        Text("Education",style: GoogleFonts.poppins(
+                        Text(
+                          "Education",
+                          style: GoogleFonts.poppins(
                               color: Color(0xFF150B3D),
-                              fontWeight: FontWeight.bold),)
+                              fontWeight: FontWeight.bold),
+                        )
                       ],
                     ),
                     SizedBox(height: 5),
                     Container(
-                      padding: EdgeInsets.all(8),
-                      width: double.infinity,
-                      height: 60,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color: Colors.white.withOpacity(0.7)),
-                      child: _educationController.text==""?Text("No education "): Text(_educationController.text),
-                    ),
+                        padding: EdgeInsets.all(8),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.white.withOpacity(0.7)),
+                        child: _educationController.text == ""
+                            ? Text("No education ")
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                      "Level of Education: ${education_detail[0]}"),
+                                  Text("Field: ${education_detail[2]}"),
+                                  Text("Institution: ${education_detail[1]}"),
+                                  Row(
+                                    children: [
+                                      Text("${education_detail[3]}"),
+                                      Text("  "),
+                                      Text("${education_detail[4]}")
+                                    ],
+                                  )
+                                ],
+                              )),
                   ],
                 ),
               ),
               SizedBox(height: 10),
               Container(
-                margin: EdgeInsets.only(left: 20,right: 20,bottom: 10),
+                margin: EdgeInsets.only(left: 20, right: 20, bottom: 10),
                 child: Column(
                   children: [
                     Row(
                       children: [
                         Image.asset("assets/icons/exp.png"),
                         SizedBox(width: 5),
-                        Text("Experience",style: GoogleFonts.poppins(
+                        Text(
+                          "Experience",
+                          style: GoogleFonts.poppins(
                               color: Color(0xFF150B3D),
-                              fontWeight: FontWeight.bold),)
+                              fontWeight: FontWeight.bold),
+                        )
                       ],
                     ),
                     SizedBox(height: 5),
                     Container(
-                      padding: EdgeInsets.all(8),
-                      width: double.infinity,
-                      height: 60,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color: Colors.white.withOpacity(0.7)),
-                      child: _experienceController.text==""?Text("No experience "): Text(_experienceController.text),
-                    ),
+                        padding: EdgeInsets.all(8),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.white.withOpacity(0.7)),
+                        child: _educationController.text == ""
+                            ? Text("No experience ")
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Job: ${experience_detail[0]}"),
+                                  Text("Company: ${experience_detail[1]}"),
+                                  Row(
+                                    children: [
+                                      Text("${experience_detail[2]}"),
+                                      Text("  "),
+                                      Text("${experience_detail[3]}")
+                                    ],
+                                  )
+                                ],
+                              )),
                   ],
                 ),
               )
