@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:post_app/screens/pages/job/job_tab.dart';
 import 'package:post_app/screens/pages/profile/main_profile.dart';
 import 'package:post_app/utilities/get_user.dart';
 import 'package:post_app/models/authentication/user_controller.dart';
@@ -115,6 +116,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
+              JobTab()
             ],
           ),
         ),
